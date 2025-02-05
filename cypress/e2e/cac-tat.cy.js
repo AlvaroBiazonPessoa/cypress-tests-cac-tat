@@ -64,4 +64,12 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
 
+  it('preencher o campo Telefone com valor não-numérico', () => {
+    const selectorOfTheFieldTelephone = '#phone'
+    const incorrectValueOfTheFieldTelephone = 'dois quatro cinco sete'
+    cy.get(selectorOfTheFieldTelephone).should('be.visible')
+    cy.get(selectorOfTheFieldTelephone).type(incorrectValueOfTheFieldTelephone)
+    cy.get(selectorOfTheFieldTelephone).should('be.empty')
+  })
+
 })
