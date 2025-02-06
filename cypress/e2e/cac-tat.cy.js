@@ -72,4 +72,35 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(selectorOfTheFieldTelephone).should('be.empty')
   })
 
+  it('preencher e limpar os campos Nome, Sobrenome, E-mail e Telefone', () => {
+    const valueOfTheMandatoryFieldNome = 'Álvaro'
+    const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
+    const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
+    const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
+    const selectorOfTheFieldNome = '#firstName'
+    const selectorOfTheFieldSobrenome = '#lastName'
+    const selectorOfTheFieldEmail = '#email'
+    const selectorOfTheFieldFeedback = '#open-text-area'
+    cy.get(selectorOfTheFieldNome).should('be.visible')
+    cy.get(selectorOfTheFieldNome).type(valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldNome).should('have.value', valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldNome).clear()
+    cy.get(selectorOfTheFieldNome).should('be.empty')
+    cy.get(selectorOfTheFieldSobrenome).should('be.visible')
+    cy.get(selectorOfTheFieldSobrenome).type(valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldSobrenome).should('have.value', valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldSobrenome).clear()
+    cy.get(selectorOfTheFieldSobrenome).should('be.empty')
+    cy.get(selectorOfTheFieldEmail).should('be.visible')
+    cy.get(selectorOfTheFieldEmail).type(valueOfTheMandatoryFieldEmail)
+    cy.get(selectorOfTheFieldEmail).should('have.value', valueOfTheMandatoryFieldEmail)
+    cy.get(selectorOfTheFieldEmail).clear()
+    cy.get(selectorOfTheFieldEmail).should('be.empty')
+    cy.get(selectorOfTheFieldFeedback).should('be.visible')
+    cy.get(selectorOfTheFieldFeedback).type(valueOfTheMandatoryFieldFeedback)
+    cy.get(selectorOfTheFieldFeedback).should('have.value', valueOfTheMandatoryFieldFeedback)
+    cy.get(selectorOfTheFieldFeedback).clear()
+    cy.get(selectorOfTheFieldFeedback).should('be.empty')
+  })
+
 })
