@@ -1,3 +1,5 @@
+const { faker } = require('@faker-js/faker')
+
 describe('Central de Atendimento ao Cliente TAT', () => {
 
   beforeEach(() => {
