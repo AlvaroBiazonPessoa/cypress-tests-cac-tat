@@ -5,6 +5,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
   const selectorOfTheFieldName = '#firstName'
   const selectorOfTheFieldLastName = '#lastName'
+  const selectorOfTheFieldEmail = '#email'
 
   beforeEach(() => {
     cy.visit(cacTatUrl)
@@ -20,7 +21,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
     const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
     const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
-    const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
     const selectorOfTheButtonEnviar = '#white-background > form > button'
     const successMessageBoxElementClass = '.success'
@@ -45,7 +45,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Bridi Vital'
     const incorrectValueOfTheMandatoryFieldEmail = 'mariana.b.vital#email.com.@.br'
     const valueOfTheMandatoryFieldFeedback = 'Adorei!'
-    const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
     const selectorOfTheButtonEnviar = '#white-background > form > button'
     const errorMessageBoxElementClass = '.error'
@@ -78,7 +77,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
     const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
     const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
-    const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
