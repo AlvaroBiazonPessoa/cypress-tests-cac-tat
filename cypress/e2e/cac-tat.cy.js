@@ -3,6 +3,7 @@ const { faker } = require('@faker-js/faker')
 describe('Central de Atendimento ao Cliente TAT', () => {
 
   const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
+  const catTatTitle = 'Central de Atendimento ao Cliente TAT'
   const selectorOfTheFieldName = '#firstName'
   const selectorOfTheFieldLastName = '#lastName'
   const selectorOfTheFieldEmail = '#email'
@@ -17,7 +18,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('verificar o título da aplicação', () => {
-    const catTatTitle = 'Central de Atendimento ao Cliente TAT'
     cy.title().should('be.equal', catTatTitle)
   })
 
