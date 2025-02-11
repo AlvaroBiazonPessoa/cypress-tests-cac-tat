@@ -2,8 +2,9 @@ const { faker } = require('@faker-js/faker')
 
 describe('Central de Atendimento ao Cliente TAT', () => {
 
+  const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
+
   beforeEach(() => {
-    const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
     cy.visit(cacTatUrl)
   })
 
