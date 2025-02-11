@@ -1,4 +1,5 @@
 const { faker } = require('@faker-js/faker')
+const Client = require('../support/Client')
 
 describe('Central de Atendimento ao Cliente TAT', () => {
 
@@ -12,9 +13,15 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const selectorOfTheButtonSend = '#white-background > form > button'
   const successMessageBoxElementClass = '.success'
   const errorMessageBoxElementClass = '.error'
+  const client = new Client()
 
   beforeEach(() => {
     cy.visit(cacTatUrl)
+    client.firstName = faker.person.firstName()
+    client.lastName = faker.person.lastName()
+    client.email = faker.internet.email({ firstName: client.firstName, lastName: client.lastName })
+    client.telephone = faker.number.int({ min: 1000000000, max: 9999999999 }) 
+    client.feedback = faker.lorem.words(5)
   })
 
   it('verificar o título da aplicação', () => {
@@ -22,77 +29,66 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('preencher os campos obrigatórios e enviar o formulário', () => {
-    const valueOfTheMandatoryFieldNome = 'Álvaro'
-    const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
-    const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
-    const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
     cy.get(selectorOfTheFieldName).should('be.visible')
-    cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).type(client.firstName)
+    cy.get(selectorOfTheFieldName).should('have.value', client.firstName)
     cy.get(selectorOfTheFieldLastName).should('be.visible')
-    cy.get(selectorOfTheFieldLastName).type(valueOfTheMandatoryFieldSobrenome)
-    cy.get(selectorOfTheFieldLastName).should('have.value', valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).type(client.lastName)
+    cy.get(selectorOfTheFieldLastName).should('have.value', client.lastName)
     cy.get(selectorOfTheFieldEmail).should('be.visible')
-    cy.get(selectorOfTheFieldEmail).type(valueOfTheMandatoryFieldEmail)
-    cy.get(selectorOfTheFieldEmail).should('have.value', valueOfTheMandatoryFieldEmail)
+    cy.get(selectorOfTheFieldEmail).type(client.email)
+    cy.get(selectorOfTheFieldEmail).should('have.value', client.email)
     cy.get(selectorOfTheFieldFeedback).should('be.visible')
-    cy.get(selectorOfTheFieldFeedback).type(valueOfTheMandatoryFieldFeedback)
-    cy.get(selectorOfTheFieldFeedback).should('have.value', valueOfTheMandatoryFieldFeedback)
+    cy.get(selectorOfTheFieldFeedback).type(client.feedback)
+    cy.get(selectorOfTheFieldFeedback).should('have.value', client.feedback)
     cy.get(selectorOfTheButtonSend).click()
     cy.get(successMessageBoxElementClass).should('be.visible')
   })
 
   it('exibir mensagem de erro ao submeter o formulário com um e-mail com formatação inválida', () => {
-    const valueOfTheMandatoryFieldNome = 'Mariana'
-    const valueOfTheMandatoryFieldSobrenome = 'Bridi Vital'
-    const incorrectValueOfTheMandatoryFieldEmail = 'mariana.b.vital#email.com.@.br'
-    const valueOfTheMandatoryFieldFeedback = 'Adorei!'
+    client.email = `${client.firstName}.${client.lastName}#gmail.@br`
     cy.get(selectorOfTheFieldName).should('be.visible')
-    cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).type(client.firstName)
+    cy.get(selectorOfTheFieldName).should('have.value', client.firstName)
     cy.get(selectorOfTheFieldLastName).should('be.visible')
-    cy.get(selectorOfTheFieldLastName).type(valueOfTheMandatoryFieldSobrenome)
-    cy.get(selectorOfTheFieldLastName).should('have.value', valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).type(client.lastName)
+    cy.get(selectorOfTheFieldLastName).should('have.value', client.lastName)
     cy.get(selectorOfTheFieldEmail).should('be.visible')
-    cy.get(selectorOfTheFieldEmail).type(incorrectValueOfTheMandatoryFieldEmail)
-    cy.get(selectorOfTheFieldEmail).should('have.value', incorrectValueOfTheMandatoryFieldEmail)
+    cy.get(selectorOfTheFieldEmail).type(client.email)
+    cy.get(selectorOfTheFieldEmail).should('have.value', client.email)
     cy.get(selectorOfTheFieldFeedback).should('be.visible')
-    cy.get(selectorOfTheFieldFeedback).type(valueOfTheMandatoryFieldFeedback)
-    cy.get(selectorOfTheFieldFeedback).should('have.value', valueOfTheMandatoryFieldFeedback)
+    cy.get(selectorOfTheFieldFeedback).type(client.feedback)
+    cy.get(selectorOfTheFieldFeedback).should('have.value', client.feedback)
     cy.get(selectorOfTheButtonSend).click()
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
 
   it('preencher o campo Telefone com valor não-numérico', () => {
-    const incorrectValueOfTheFieldTelephone = 'dois quatro cinco sete'
+    client.telephone = 'one two six six'
     cy.get(selectorOfTheFieldTelephone).should('be.visible')
-    cy.get(selectorOfTheFieldTelephone).type(incorrectValueOfTheFieldTelephone)
+    cy.get(selectorOfTheFieldTelephone).type(client.telephone)
     cy.get(selectorOfTheFieldTelephone).should('be.empty')
   })
 
   it('preencher e limpar os campos Nome, Sobrenome, E-mail e Telefone', () => {
-    const valueOfTheMandatoryFieldNome = 'Álvaro'
-    const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
-    const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
-    const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
     cy.get(selectorOfTheFieldName).should('be.visible')
-    cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).type(client.firstName)
+    cy.get(selectorOfTheFieldName).should('have.value', client.firstName)
     cy.get(selectorOfTheFieldName).clear()
     cy.get(selectorOfTheFieldName).should('be.empty')
     cy.get(selectorOfTheFieldLastName).should('be.visible')
-    cy.get(selectorOfTheFieldLastName).type(valueOfTheMandatoryFieldSobrenome)
-    cy.get(selectorOfTheFieldLastName).should('have.value', valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).type(client.lastName)
+    cy.get(selectorOfTheFieldLastName).should('have.value', client.lastName)
     cy.get(selectorOfTheFieldLastName).clear()
     cy.get(selectorOfTheFieldLastName).should('be.empty')
     cy.get(selectorOfTheFieldEmail).should('be.visible')
-    cy.get(selectorOfTheFieldEmail).type(valueOfTheMandatoryFieldEmail)
-    cy.get(selectorOfTheFieldEmail).should('have.value', valueOfTheMandatoryFieldEmail)
+    cy.get(selectorOfTheFieldEmail).type(client.email)
+    cy.get(selectorOfTheFieldEmail).should('have.value', client.email)
     cy.get(selectorOfTheFieldEmail).clear()
     cy.get(selectorOfTheFieldEmail).should('be.empty')
     cy.get(selectorOfTheFieldFeedback).should('be.visible')
-    cy.get(selectorOfTheFieldFeedback).type(valueOfTheMandatoryFieldFeedback)
-    cy.get(selectorOfTheFieldFeedback).should('have.value', valueOfTheMandatoryFieldFeedback)
+    cy.get(selectorOfTheFieldFeedback).type(client.feedback)
+    cy.get(selectorOfTheFieldFeedback).should('have.value', client.feedback)
     cy.get(selectorOfTheFieldFeedback).clear()
     cy.get(selectorOfTheFieldFeedback).should('be.empty')
   })
