@@ -7,6 +7,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const selectorOfTheFieldLastName = '#lastName'
   const selectorOfTheFieldEmail = '#email'
   const selectorOfTheFieldFeedback = '#open-text-area'
+  const selectorOfTheFieldTelephone = '#phone'
 
   beforeEach(() => {
     cy.visit(cacTatUrl)
@@ -64,7 +65,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('preencher o campo Telefone com valor não-numérico', () => {
-    const selectorOfTheFieldTelephone = '#phone'
     const incorrectValueOfTheFieldTelephone = 'dois quatro cinco sete'
     cy.get(selectorOfTheFieldTelephone).should('be.visible')
     cy.get(selectorOfTheFieldTelephone).type(incorrectValueOfTheFieldTelephone)
