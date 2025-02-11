@@ -3,11 +3,11 @@ class Client {
     constructor(firstName, lastName, email, telephone, feedback) {
         this.firstName = firstName
         this.lastName = lastName
-        this.email
-        this.telephone
+        this.email = email
+        this.telephone = telephone
         this.feedback = feedback
     }
 
 }
 
-export default Client
+module.exports = Client
