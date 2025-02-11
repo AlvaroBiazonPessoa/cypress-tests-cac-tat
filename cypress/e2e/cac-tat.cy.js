@@ -9,6 +9,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const selectorOfTheFieldFeedback = '#open-text-area'
   const selectorOfTheFieldTelephone = '#phone'
   const selectorOfTheButtonSend = '#white-background > form > button'
+  const successMessageBoxElementClass = '.success'
 
   beforeEach(() => {
     cy.visit(cacTatUrl)
@@ -24,7 +25,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
     const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
     const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
-    const successMessageBoxElementClass = '.success'
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
     cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
