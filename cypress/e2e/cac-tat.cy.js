@@ -4,6 +4,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
   const selectorOfTheFieldName = '#firstName'
+  const selectorOfTheFieldLastName = '#lastName'
 
   beforeEach(() => {
     cy.visit(cacTatUrl)
@@ -19,7 +20,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
     const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
     const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
-    const selectorOfTheFieldSobrenome = '#lastName'
     const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
     const selectorOfTheButtonEnviar = '#white-background > form > button'
@@ -27,9 +27,9 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
     cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldSobrenome).should('be.visible')
-    cy.get(selectorOfTheFieldSobrenome).type(valueOfTheMandatoryFieldSobrenome)
-    cy.get(selectorOfTheFieldSobrenome).should('have.value', valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).should('be.visible')
+    cy.get(selectorOfTheFieldLastName).type(valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).should('have.value', valueOfTheMandatoryFieldSobrenome)
     cy.get(selectorOfTheFieldEmail).should('be.visible')
     cy.get(selectorOfTheFieldEmail).type(valueOfTheMandatoryFieldEmail)
     cy.get(selectorOfTheFieldEmail).should('have.value', valueOfTheMandatoryFieldEmail)
@@ -45,7 +45,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Bridi Vital'
     const incorrectValueOfTheMandatoryFieldEmail = 'mariana.b.vital#email.com.@.br'
     const valueOfTheMandatoryFieldFeedback = 'Adorei!'
-    const selectorOfTheFieldSobrenome = '#lastName'
     const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
     const selectorOfTheButtonEnviar = '#white-background > form > button'
@@ -53,9 +52,9 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
     cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldSobrenome).should('be.visible')
-    cy.get(selectorOfTheFieldSobrenome).type(valueOfTheMandatoryFieldSobrenome)
-    cy.get(selectorOfTheFieldSobrenome).should('have.value', valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).should('be.visible')
+    cy.get(selectorOfTheFieldLastName).type(valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).should('have.value', valueOfTheMandatoryFieldSobrenome)
     cy.get(selectorOfTheFieldEmail).should('be.visible')
     cy.get(selectorOfTheFieldEmail).type(incorrectValueOfTheMandatoryFieldEmail)
     cy.get(selectorOfTheFieldEmail).should('have.value', incorrectValueOfTheMandatoryFieldEmail)
@@ -79,7 +78,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
     const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
     const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
-    const selectorOfTheFieldSobrenome = '#lastName'
     const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
     cy.get(selectorOfTheFieldName).should('be.visible')
@@ -87,11 +85,11 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
     cy.get(selectorOfTheFieldName).clear()
     cy.get(selectorOfTheFieldName).should('be.empty')
-    cy.get(selectorOfTheFieldSobrenome).should('be.visible')
-    cy.get(selectorOfTheFieldSobrenome).type(valueOfTheMandatoryFieldSobrenome)
-    cy.get(selectorOfTheFieldSobrenome).should('have.value', valueOfTheMandatoryFieldSobrenome)
-    cy.get(selectorOfTheFieldSobrenome).clear()
-    cy.get(selectorOfTheFieldSobrenome).should('be.empty')
+    cy.get(selectorOfTheFieldLastName).should('be.visible')
+    cy.get(selectorOfTheFieldLastName).type(valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).should('have.value', valueOfTheMandatoryFieldSobrenome)
+    cy.get(selectorOfTheFieldLastName).clear()
+    cy.get(selectorOfTheFieldLastName).should('be.empty')
     cy.get(selectorOfTheFieldEmail).should('be.visible')
     cy.get(selectorOfTheFieldEmail).type(valueOfTheMandatoryFieldEmail)
     cy.get(selectorOfTheFieldEmail).should('have.value', valueOfTheMandatoryFieldEmail)
