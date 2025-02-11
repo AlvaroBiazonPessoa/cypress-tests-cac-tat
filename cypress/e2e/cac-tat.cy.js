@@ -10,6 +10,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const selectorOfTheFieldTelephone = '#phone'
   const selectorOfTheButtonSend = '#white-background > form > button'
   const successMessageBoxElementClass = '.success'
+  const errorMessageBoxElementClass = '.error'
 
   beforeEach(() => {
     cy.visit(cacTatUrl)
@@ -46,7 +47,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Bridi Vital'
     const incorrectValueOfTheMandatoryFieldEmail = 'mariana.b.vital#email.com.@.br'
     const valueOfTheMandatoryFieldFeedback = 'Adorei!'
-    const errorMessageBoxElementClass = '.error'
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
     cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
@@ -98,7 +98,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('exibir mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
-    const errorMessageBoxElementClass = '.error'
     cy.get(selectorOfTheButtonSend).click()
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
