@@ -3,6 +3,7 @@ const { faker } = require('@faker-js/faker')
 describe('Central de Atendimento ao Cliente TAT', () => {
 
   const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
+  const selectorOfTheFieldName = '#firstName'
 
   beforeEach(() => {
     cy.visit(cacTatUrl)
@@ -18,15 +19,14 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
     const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
     const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
-    const selectorOfTheFieldNome = '#firstName'
     const selectorOfTheFieldSobrenome = '#lastName'
     const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
     const selectorOfTheButtonEnviar = '#white-background > form > button'
     const successMessageBoxElementClass = '.success'
-    cy.get(selectorOfTheFieldNome).should('be.visible')
-    cy.get(selectorOfTheFieldNome).type(valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldNome).should('have.value', valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).should('be.visible')
+    cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
     cy.get(selectorOfTheFieldSobrenome).should('be.visible')
     cy.get(selectorOfTheFieldSobrenome).type(valueOfTheMandatoryFieldSobrenome)
     cy.get(selectorOfTheFieldSobrenome).should('have.value', valueOfTheMandatoryFieldSobrenome)
@@ -45,15 +45,14 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Bridi Vital'
     const incorrectValueOfTheMandatoryFieldEmail = 'mariana.b.vital#email.com.@.br'
     const valueOfTheMandatoryFieldFeedback = 'Adorei!'
-    const selectorOfTheFieldNome = '#firstName'
     const selectorOfTheFieldSobrenome = '#lastName'
     const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
     const selectorOfTheButtonEnviar = '#white-background > form > button'
     const errorMessageBoxElementClass = '.error'
-    cy.get(selectorOfTheFieldNome).should('be.visible')
-    cy.get(selectorOfTheFieldNome).type(valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldNome).should('have.value', valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).should('be.visible')
+    cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
     cy.get(selectorOfTheFieldSobrenome).should('be.visible')
     cy.get(selectorOfTheFieldSobrenome).type(valueOfTheMandatoryFieldSobrenome)
     cy.get(selectorOfTheFieldSobrenome).should('have.value', valueOfTheMandatoryFieldSobrenome)
@@ -80,15 +79,14 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
     const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
     const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
-    const selectorOfTheFieldNome = '#firstName'
     const selectorOfTheFieldSobrenome = '#lastName'
     const selectorOfTheFieldEmail = '#email'
     const selectorOfTheFieldFeedback = '#open-text-area'
-    cy.get(selectorOfTheFieldNome).should('be.visible')
-    cy.get(selectorOfTheFieldNome).type(valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldNome).should('have.value', valueOfTheMandatoryFieldNome)
-    cy.get(selectorOfTheFieldNome).clear()
-    cy.get(selectorOfTheFieldNome).should('be.empty')
+    cy.get(selectorOfTheFieldName).should('be.visible')
+    cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).should('have.value', valueOfTheMandatoryFieldNome)
+    cy.get(selectorOfTheFieldName).clear()
+    cy.get(selectorOfTheFieldName).should('be.empty')
     cy.get(selectorOfTheFieldSobrenome).should('be.visible')
     cy.get(selectorOfTheFieldSobrenome).type(valueOfTheMandatoryFieldSobrenome)
     cy.get(selectorOfTheFieldSobrenome).should('have.value', valueOfTheMandatoryFieldSobrenome)
