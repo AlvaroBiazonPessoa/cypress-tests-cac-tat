@@ -8,6 +8,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const selectorOfTheFieldEmail = '#email'
   const selectorOfTheFieldFeedback = '#open-text-area'
   const selectorOfTheFieldTelephone = '#phone'
+  const selectorOfTheButtonSend = '#white-background > form > button'
 
   beforeEach(() => {
     cy.visit(cacTatUrl)
@@ -23,7 +24,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Biazon Pessoa'
     const valueOfTheMandatoryFieldEmail = 'alvaro.b.pessoa@email.com'
     const valueOfTheMandatoryFieldFeedback = 'Sem feedbacks'
-    const selectorOfTheButtonEnviar = '#white-background > form > button'
     const successMessageBoxElementClass = '.success'
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
@@ -37,7 +37,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(selectorOfTheFieldFeedback).should('be.visible')
     cy.get(selectorOfTheFieldFeedback).type(valueOfTheMandatoryFieldFeedback)
     cy.get(selectorOfTheFieldFeedback).should('have.value', valueOfTheMandatoryFieldFeedback)
-    cy.get(selectorOfTheButtonEnviar).click()
+    cy.get(selectorOfTheButtonSend).click()
     cy.get(successMessageBoxElementClass).should('be.visible')
   })
 
@@ -46,7 +46,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     const valueOfTheMandatoryFieldSobrenome = 'Bridi Vital'
     const incorrectValueOfTheMandatoryFieldEmail = 'mariana.b.vital#email.com.@.br'
     const valueOfTheMandatoryFieldFeedback = 'Adorei!'
-    const selectorOfTheButtonEnviar = '#white-background > form > button'
     const errorMessageBoxElementClass = '.error'
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(valueOfTheMandatoryFieldNome)
@@ -60,7 +59,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(selectorOfTheFieldFeedback).should('be.visible')
     cy.get(selectorOfTheFieldFeedback).type(valueOfTheMandatoryFieldFeedback)
     cy.get(selectorOfTheFieldFeedback).should('have.value', valueOfTheMandatoryFieldFeedback)
-    cy.get(selectorOfTheButtonEnviar).click()
+    cy.get(selectorOfTheButtonSend).click()
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
 
@@ -99,9 +98,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('exibir mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
-    const selectorOfTheButtonEnviar = '#white-background > form > button'
     const errorMessageBoxElementClass = '.error'
-    cy.get(selectorOfTheButtonEnviar).click()
+    cy.get(selectorOfTheButtonSend).click()
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
 
