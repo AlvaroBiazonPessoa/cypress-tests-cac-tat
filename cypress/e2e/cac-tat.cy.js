@@ -28,21 +28,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.title().should('be.equal', catTatTitle)
   })
 
-  it('preencher os campos obrigatórios e enviar o formulário', () => {
-    cy.get(selectorOfTheFieldName).should('be.visible')
-    cy.get(selectorOfTheFieldName).type(client.firstName)
-    cy.get(selectorOfTheFieldName).should('have.value', client.firstName)
-    cy.get(selectorOfTheFieldLastName).should('be.visible')
-    cy.get(selectorOfTheFieldLastName).type(client.lastName)
-    cy.get(selectorOfTheFieldLastName).should('have.value', client.lastName)
-    cy.get(selectorOfTheFieldEmail).should('be.visible')
-    cy.get(selectorOfTheFieldEmail).type(client.email)
-    cy.get(selectorOfTheFieldEmail).should('have.value', client.email)
-    cy.get(selectorOfTheFieldFeedback).should('be.visible')
-    cy.get(selectorOfTheFieldFeedback).type(client.feedback)
-    cy.get(selectorOfTheFieldFeedback).should('have.value', client.feedback)
-    cy.get(selectorOfTheButtonSend).click()
-    cy.get(successMessageBoxElementClass).should('be.visible')
+  it.only('preencher os campos obrigatórios e enviar o formulário', () => {
+    cy.gui_fillMandatoryFieldsAndSubmit(selectorOfTheFieldName, selectorOfTheFieldLastName, selectorOfTheFieldEmail, selectorOfTheFieldFeedback, selectorOfTheButtonSend, successMessageBoxElementClass, client)
   })
 
   it('exibir mensagem de erro ao submeter o formulário com um e-mail com formatação inválida', () => {
