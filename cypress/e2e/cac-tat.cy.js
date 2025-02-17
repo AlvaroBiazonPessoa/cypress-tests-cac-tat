@@ -28,7 +28,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.title().should('be.equal', catTatTitle)
   })
 
-  it.only('preencher os campos obrigatórios e enviar o formulário', () => {
+  it('preencher os campos obrigatórios e enviar o formulário', () => {
     cy.gui_fillMandatoryFieldsAndSubmit(selectorOfTheFieldName, selectorOfTheFieldLastName, selectorOfTheFieldEmail, selectorOfTheFieldFeedback, selectorOfTheButtonSend, successMessageBoxElementClass, client)
   })
 
