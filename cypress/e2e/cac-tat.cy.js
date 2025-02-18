@@ -5,15 +5,15 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
   const catTatTitle = 'Central de Atendimento ao Cliente TAT'
-  const selectorOfTheFieldName = '#firstName'
-  const selectorOfTheFieldLastName = '#lastName'
-  const selectorOfTheFieldEmail = '#email'
-  const selectorOfTheFieldFeedback = '#open-text-area'
-  const selectorOfTheFieldTelephone = '#phone'
-  const classOfTheButtonSend = '.button'
-  const buttonTagContent = 'Enviar'
-  const successMessageBoxElementClass = '.success'
-  const errorMessageBoxElementClass = '.error'
+  const idOfTheFieldName = '#firstName'
+  const idOfTheFieldLastName = '#lastName'
+  const idOfTheFieldEmail = '#email'
+  const idOfTheFieldFeedback = '#open-text-area'
+  const idOfTheFieldTelephone = '#phone'
+  const classOfTheSubmitButton = '.button'
+  const contentOfTheSubmitButton = 'Enviar'
+  const classOfTheSuccessMessage = '.success'
+  const classOfTheErrorMessage = '.error'
   const client = new Client()
 
   beforeEach(() => {
@@ -30,65 +30,65 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('fill in the required fields and submit the form', () => {
-    cy.gui_fillMandatoryFieldsAndSubmit(selectorOfTheFieldName, selectorOfTheFieldLastName, selectorOfTheFieldEmail, selectorOfTheFieldFeedback, classOfTheButtonSend, buttonTagContent, successMessageBoxElementClass, client)
+    cy.gui_fillMandatoryFieldsAndSubmit(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, classOfTheSubmitButton, contentOfTheSubmitButton, classOfTheSuccessMessage, client)
   })
 
   it('display an error message when submitting the form with an invalid email format', () => {
     client.email = `${client.firstName}.${client.lastName}#gmail.@br`
-    cy.get(selectorOfTheFieldName).should('be.visible')
-    cy.get(selectorOfTheFieldName).type(client.firstName)
-    cy.get(selectorOfTheFieldName).should('have.value', client.firstName)
-    cy.get(selectorOfTheFieldLastName).should('be.visible')
-    cy.get(selectorOfTheFieldLastName).type(client.lastName)
-    cy.get(selectorOfTheFieldLastName).should('have.value', client.lastName)
-    cy.get(selectorOfTheFieldEmail).should('be.visible')
-    cy.get(selectorOfTheFieldEmail).type(client.email)
-    cy.get(selectorOfTheFieldEmail).should('have.value', client.email)
-    cy.get(selectorOfTheFieldFeedback).should('be.visible')
-    cy.get(selectorOfTheFieldFeedback).type(client.feedback)
-    cy.get(selectorOfTheFieldFeedback).should('have.value', client.feedback)
-    cy.contains(classOfTheButtonSend, buttonTagContent).click()
-    cy.get(errorMessageBoxElementClass).should('be.visible')
+    cy.get(idOfTheFieldName).should('be.visible')
+    cy.get(idOfTheFieldName).type(client.firstName)
+    cy.get(idOfTheFieldName).should('have.value', client.firstName)
+    cy.get(idOfTheFieldLastName).should('be.visible')
+    cy.get(idOfTheFieldLastName).type(client.lastName)
+    cy.get(idOfTheFieldLastName).should('have.value', client.lastName)
+    cy.get(idOfTheFieldEmail).should('be.visible')
+    cy.get(idOfTheFieldEmail).type(client.email)
+    cy.get(idOfTheFieldEmail).should('have.value', client.email)
+    cy.get(idOfTheFieldFeedback).should('be.visible')
+    cy.get(idOfTheFieldFeedback).type(client.feedback)
+    cy.get(idOfTheFieldFeedback).should('have.value', client.feedback)
+    cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
+    cy.get(classOfTheErrorMessage).should('be.visible')
   })
 
   it('fill in the Telephone field with a non-numeric value', () => {
     client.telephone = 'one two six six'
-    cy.get(selectorOfTheFieldTelephone).should('be.visible')
-    cy.get(selectorOfTheFieldTelephone).type(client.telephone)
-    cy.get(selectorOfTheFieldTelephone).should('be.empty')
+    cy.get(idOfTheFieldTelephone).should('be.visible')
+    cy.get(idOfTheFieldTelephone).type(client.telephone)
+    cy.get(idOfTheFieldTelephone).should('be.empty')
   })
 
   it('fill in and clear the Name, Lastname, Email, and Telephone fields', () => {
-    cy.get(selectorOfTheFieldName).should('be.visible')
-    cy.get(selectorOfTheFieldName).type(client.firstName)
-    cy.get(selectorOfTheFieldName).should('have.value', client.firstName)
-    cy.get(selectorOfTheFieldName).clear()
-    cy.get(selectorOfTheFieldName).should('be.empty')
-    cy.get(selectorOfTheFieldLastName).should('be.visible')
-    cy.get(selectorOfTheFieldLastName).type(client.lastName)
-    cy.get(selectorOfTheFieldLastName).should('have.value', client.lastName)
-    cy.get(selectorOfTheFieldLastName).clear()
-    cy.get(selectorOfTheFieldLastName).should('be.empty')
-    cy.get(selectorOfTheFieldEmail).should('be.visible')
-    cy.get(selectorOfTheFieldEmail).type(client.email)
-    cy.get(selectorOfTheFieldEmail).should('have.value', client.email)
-    cy.get(selectorOfTheFieldEmail).clear()
-    cy.get(selectorOfTheFieldEmail).should('be.empty')
-    cy.get(selectorOfTheFieldTelephone).should('be.visible')
-    cy.get(selectorOfTheFieldTelephone).type(client.telephone)
-    cy.get(selectorOfTheFieldTelephone).should('have.value', client.telephone)
-    cy.get(selectorOfTheFieldTelephone).clear()
-    cy.get(selectorOfTheFieldTelephone).should('be.empty')
-    cy.get(selectorOfTheFieldFeedback).should('be.visible')
-    cy.get(selectorOfTheFieldFeedback).type(client.feedback)
-    cy.get(selectorOfTheFieldFeedback).should('have.value', client.feedback)
-    cy.get(selectorOfTheFieldFeedback).clear()
-    cy.get(selectorOfTheFieldFeedback).should('be.empty')
+    cy.get(idOfTheFieldName).should('be.visible')
+    cy.get(idOfTheFieldName).type(client.firstName)
+    cy.get(idOfTheFieldName).should('have.value', client.firstName)
+    cy.get(idOfTheFieldName).clear()
+    cy.get(idOfTheFieldName).should('be.empty')
+    cy.get(idOfTheFieldLastName).should('be.visible')
+    cy.get(idOfTheFieldLastName).type(client.lastName)
+    cy.get(idOfTheFieldLastName).should('have.value', client.lastName)
+    cy.get(idOfTheFieldLastName).clear()
+    cy.get(idOfTheFieldLastName).should('be.empty')
+    cy.get(idOfTheFieldEmail).should('be.visible')
+    cy.get(idOfTheFieldEmail).type(client.email)
+    cy.get(idOfTheFieldEmail).should('have.value', client.email)
+    cy.get(idOfTheFieldEmail).clear()
+    cy.get(idOfTheFieldEmail).should('be.empty')
+    cy.get(idOfTheFieldTelephone).should('be.visible')
+    cy.get(idOfTheFieldTelephone).type(client.telephone)
+    cy.get(idOfTheFieldTelephone).should('have.value', client.telephone)
+    cy.get(idOfTheFieldTelephone).clear()
+    cy.get(idOfTheFieldTelephone).should('be.empty')
+    cy.get(idOfTheFieldFeedback).should('be.visible')
+    cy.get(idOfTheFieldFeedback).type(client.feedback)
+    cy.get(idOfTheFieldFeedback).should('have.value', client.feedback)
+    cy.get(idOfTheFieldFeedback).clear()
+    cy.get(idOfTheFieldFeedback).should('be.empty')
   })
 
   it('display an error message when submitting the form without filling in the required fields', () => {
-    cy.contains(classOfTheButtonSend, buttonTagContent).click()
-    cy.get(errorMessageBoxElementClass).should('be.visible')
+    cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
+    cy.get(classOfTheErrorMessage).should('be.visible')
   })
 
 })
