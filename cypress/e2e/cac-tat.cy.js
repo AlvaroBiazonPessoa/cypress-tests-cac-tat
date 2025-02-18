@@ -12,6 +12,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const idOfTheFieldTelephone = '#phone'
   const classOfTheSubmitButton = '.button'
   const contentOfTheSubmitButton = 'Enviar'
+  const idOfTheCheckboxOfTheTelephone = '#phone-checkbox'
   const classOfTheSuccessMessage = '.success'
   const classOfTheErrorMessage = '.error'
   const client = new Client()
