@@ -10,7 +10,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const selectorOfTheFieldEmail = '#email'
   const selectorOfTheFieldFeedback = '#open-text-area'
   const selectorOfTheFieldTelephone = '#phone'
-  const selectorOfTheButtonSend = '#white-background > form > button'
+  const classOfTheButtonSend = '.button'
+  const buttonTagContent = 'Enviar'
   const successMessageBoxElementClass = '.success'
   const errorMessageBoxElementClass = '.error'
   const client = new Client()
@@ -29,7 +30,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('fill in the required fields and submit the form', () => {
-    cy.gui_fillMandatoryFieldsAndSubmit(selectorOfTheFieldName, selectorOfTheFieldLastName, selectorOfTheFieldEmail, selectorOfTheFieldFeedback, selectorOfTheButtonSend, successMessageBoxElementClass, client)
+    cy.gui_fillMandatoryFieldsAndSubmit(selectorOfTheFieldName, selectorOfTheFieldLastName, selectorOfTheFieldEmail, selectorOfTheFieldFeedback, classOfTheButtonSend, buttonTagContent, successMessageBoxElementClass, client)
   })
 
   it('display an error message when submitting the form with an invalid email format', () => {
@@ -46,7 +47,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(selectorOfTheFieldFeedback).should('be.visible')
     cy.get(selectorOfTheFieldFeedback).type(client.feedback)
     cy.get(selectorOfTheFieldFeedback).should('have.value', client.feedback)
-    cy.get(selectorOfTheButtonSend).click()
+    cy.contains(classOfTheButtonSend, buttonTagContent).click()
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
 
@@ -86,7 +87,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('display an error message when submitting the form without filling in the required fields', () => {
-    cy.get(selectorOfTheButtonSend).click()
+    cy.contains(classOfTheButtonSend, buttonTagContent).click()
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
 

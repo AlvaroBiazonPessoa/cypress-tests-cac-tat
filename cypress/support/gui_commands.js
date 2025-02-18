@@ -1,4 +1,4 @@
-Cypress.Commands.add('gui_fillMandatoryFieldsAndSubmit', (selectorOfTheFieldName, selectorOfTheFieldLastName, selectorOfTheFieldEmail, selectorOfTheFieldFeedback, selectorOfTheButtonSend, successMessageBoxElementClass, client) => {
+Cypress.Commands.add('gui_fillMandatoryFieldsAndSubmit', (selectorOfTheFieldName, selectorOfTheFieldLastName, selectorOfTheFieldEmail, selectorOfTheFieldFeedback, classOfTheButtonSend, buttonTagContent, successMessageBoxElementClass, client) => {
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(client.firstName)
     cy.get(selectorOfTheFieldName).should('have.value', client.firstName)
@@ -11,6 +11,6 @@ Cypress.Commands.add('gui_fillMandatoryFieldsAndSubmit', (selectorOfTheFieldName
     cy.get(selectorOfTheFieldFeedback).should('be.visible')
     cy.get(selectorOfTheFieldFeedback).type(client.feedback)
     cy.get(selectorOfTheFieldFeedback).should('have.value', client.feedback)
-    cy.get(selectorOfTheButtonSend).click()
+    cy.contains(classOfTheButtonSend, buttonTagContent).click()
     cy.get(successMessageBoxElementClass).should('be.visible')
 })
