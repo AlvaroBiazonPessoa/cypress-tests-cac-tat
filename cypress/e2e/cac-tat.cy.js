@@ -24,15 +24,15 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     client.feedback = faker.lorem.words(5)
   })
 
-  it('verificar o título da aplicação', () => {
+  it('check the application title', () => {
     cy.title().should('be.equal', catTatTitle)
   })
 
-  it('preencher os campos obrigatórios e enviar o formulário', () => {
+  it('fill in the required fields and submit the form', () => {
     cy.gui_fillMandatoryFieldsAndSubmit(selectorOfTheFieldName, selectorOfTheFieldLastName, selectorOfTheFieldEmail, selectorOfTheFieldFeedback, selectorOfTheButtonSend, successMessageBoxElementClass, client)
   })
 
-  it('exibir mensagem de erro ao submeter o formulário com um e-mail com formatação inválida', () => {
+  it('display an error message when submitting the form with an invalid email format', () => {
     client.email = `${client.firstName}.${client.lastName}#gmail.@br`
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(client.firstName)
@@ -50,14 +50,14 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
 
-  it('preencher o campo Telefone com valor não-numérico', () => {
+  it('fill in the Telephone field with a non-numeric value', () => {
     client.telephone = 'one two six six'
     cy.get(selectorOfTheFieldTelephone).should('be.visible')
     cy.get(selectorOfTheFieldTelephone).type(client.telephone)
     cy.get(selectorOfTheFieldTelephone).should('be.empty')
   })
 
-  it('preencher e limpar os campos Nome, Sobrenome, E-mail e Telefone', () => {
+  it('fill in and clear the Name, Lastname, Email, and Telephone fields', () => {
     cy.get(selectorOfTheFieldName).should('be.visible')
     cy.get(selectorOfTheFieldName).type(client.firstName)
     cy.get(selectorOfTheFieldName).should('have.value', client.firstName)
@@ -85,7 +85,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(selectorOfTheFieldFeedback).should('be.empty')
   })
 
-  it('exibir mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+  it('display an error message when submitting the form without filling in the required fields', () => {
     cy.get(selectorOfTheButtonSend).click()
     cy.get(errorMessageBoxElementClass).should('be.visible')
   })
