@@ -16,6 +16,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const idOfTheFieldProduct = '#product'
   const valueOfTheTagOptionYouTube = 'youtube'
   const contentOfTheTagOptionYouTube = 'YouTube'
+  const valueOfTheTagOptionMentorship = 'mentoria'
   const classOfTheSuccessMessage = '.success'
   const classOfTheErrorMessage = '.error'
   const client = new Client()
