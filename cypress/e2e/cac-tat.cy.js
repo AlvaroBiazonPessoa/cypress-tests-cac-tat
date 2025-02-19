@@ -93,4 +93,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(classOfTheErrorMessage).should('be.visible')
   })
 
+  it('select a product (YouTube) by its text', () => {
+    cy.get(idOfTheFieldProduct).select(contentOfTheTagOptionYouTube).should('have.value', valueOfTheTagOptionYouTube)
+  })
+
 })
