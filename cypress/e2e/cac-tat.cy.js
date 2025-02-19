@@ -31,7 +31,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('fill in the required fields and submit the form', () => {
-    cy.gui_fillMandatoryFieldsAndSubmit(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, classOfTheSubmitButton, contentOfTheSubmitButton, classOfTheSuccessMessage, client)
+    cy.gui_fillMandatoryFieldsAndSubmit(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, classOfTheSubmitButton, contentOfTheSubmitButton, client)
+    cy.get(classOfTheSuccessMessage).should('be.visible')
   })
 
   it('display an error message when submitting the form with an invalid email format', () => {
