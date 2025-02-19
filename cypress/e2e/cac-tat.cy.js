@@ -98,4 +98,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(idOfTheFieldProduct).select(contentOfTheTagOptionYouTube).should('have.value', valueOfTheTagOptionYouTube)
   })
 
+  it('select a product (Mentorship) by its value (value)', () => {
+    cy.get(idOfTheFieldProduct).select(valueOfTheTagOptionMentorship).should('have.value', valueOfTheTagOptionMentorship)
+  })
+
 })
