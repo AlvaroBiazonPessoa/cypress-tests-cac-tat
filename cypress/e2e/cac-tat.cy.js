@@ -32,6 +32,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   it('fill in the required fields and submit the form', () => {
     cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, client)
+    cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
     cy.get(classOfTheSuccessMessage).should('be.visible')
   })
 
