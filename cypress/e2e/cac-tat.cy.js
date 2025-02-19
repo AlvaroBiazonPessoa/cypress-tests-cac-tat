@@ -31,7 +31,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('fill in the required fields and submit the form', () => {
-    cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, classOfTheSubmitButton, contentOfTheSubmitButton, client)
+    cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, client)
     cy.get(classOfTheSuccessMessage).should('be.visible')
   })
 
@@ -61,7 +61,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it.only('display an error message when the Telephone field becomes required but is not filled in before submitting the form', () => {
-    cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, classOfTheSubmitButton, contentOfTheSubmitButton, client)
+    cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, client)
     cy.get(idOfTheCheckboxOfTheTelephone).click()
     cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
     cy.get(classOfTheErrorMessage).should('be.visible')

@@ -1,4 +1,4 @@
-Cypress.Commands.add('gui_fillMandatoryFields', (idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, classOfTheSubmitButton, contentOfTheSubmitButton, client) => {
+Cypress.Commands.add('gui_fillMandatoryFields', (idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, client) => {
     cy.get(idOfTheFieldName).should('be.visible')
     cy.get(idOfTheFieldName).type(client.firstName)
     cy.get(idOfTheFieldName).should('have.value', client.firstName)
@@ -11,5 +11,4 @@ Cypress.Commands.add('gui_fillMandatoryFields', (idOfTheFieldName, idOfTheFieldL
     cy.get(idOfTheFieldFeedback).should('be.visible')
     cy.get(idOfTheFieldFeedback).type(client.feedback)
     cy.get(idOfTheFieldFeedback).should('have.value', client.feedback)
-    cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
 })
