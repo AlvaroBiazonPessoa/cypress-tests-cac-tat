@@ -38,18 +38,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   it('display an error message when submitting the form with an invalid email format', () => {
     client.email = `${client.firstName}.${client.lastName}#gmail.@br`
-    cy.get(idOfTheFieldName).should('be.visible')
-    cy.get(idOfTheFieldName).type(client.firstName)
-    cy.get(idOfTheFieldName).should('have.value', client.firstName)
-    cy.get(idOfTheFieldLastName).should('be.visible')
-    cy.get(idOfTheFieldLastName).type(client.lastName)
-    cy.get(idOfTheFieldLastName).should('have.value', client.lastName)
-    cy.get(idOfTheFieldEmail).should('be.visible')
-    cy.get(idOfTheFieldEmail).type(client.email)
-    cy.get(idOfTheFieldEmail).should('have.value', client.email)
-    cy.get(idOfTheFieldFeedback).should('be.visible')
-    cy.get(idOfTheFieldFeedback).type(client.feedback)
-    cy.get(idOfTheFieldFeedback).should('have.value', client.feedback)
+    cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, client)
     cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
     cy.get(classOfTheErrorMessage).should('be.visible')
   })
