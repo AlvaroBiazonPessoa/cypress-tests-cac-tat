@@ -60,19 +60,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(idOfTheFieldTelephone).should('be.empty')
   })
 
-  it('display an error message when the Telephone field becomes required but is not filled in before submitting the form', () => {
-    cy.get(idOfTheFieldName).should('be.visible')
-    cy.get(idOfTheFieldName).type(client.firstName)
-    cy.get(idOfTheFieldName).should('have.value', client.firstName)
-    cy.get(idOfTheFieldLastName).should('be.visible')
-    cy.get(idOfTheFieldLastName).type(client.lastName)
-    cy.get(idOfTheFieldLastName).should('have.value', client.lastName)
-    cy.get(idOfTheFieldEmail).should('be.visible')
-    cy.get(idOfTheFieldEmail).type(client.email)
-    cy.get(idOfTheFieldEmail).should('have.value', client.email)
-    cy.get(idOfTheFieldFeedback).should('be.visible')
-    cy.get(idOfTheFieldFeedback).type(client.feedback)
-    cy.get(idOfTheFieldFeedback).should('have.value', client.feedback)
+  it.only('display an error message when the Telephone field becomes required but is not filled in before submitting the form', () => {
+    cy.gui_fillMandatoryFieldsAndSubmit(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, classOfTheSubmitButton, contentOfTheSubmitButton, client)
     cy.get(idOfTheCheckboxOfTheTelephone).click()
     cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
     cy.get(classOfTheErrorMessage).should('be.visible')
