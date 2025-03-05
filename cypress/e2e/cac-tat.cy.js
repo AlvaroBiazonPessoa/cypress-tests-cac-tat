@@ -19,6 +19,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const valueOfTheTagOptionMentorship = 'mentoria'
   const valueOfTheTagOptionBlog = 'blog'
   const indexOfTheTagOptionBlog = 1
+  const feedbackRadioButtonSelector = 'input[type="radio"][value="feedback"]'
   const classOfTheSuccessMessage = '.success'
   const classOfTheErrorMessage = '.error'
   const client = new Client()
