@@ -4,24 +4,16 @@ const Client = require('../fixtures/Client')
 describe('Central de Atendimento ao Cliente TAT', () => {
 
   const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
-  const catTatTitle = 'Central de Atendimento ao Cliente TAT'
-  const idOfTheFieldName = '#firstName'
-  const idOfTheFieldLastName = '#lastName'
-  const idOfTheFieldEmail = '#email'
-  const idOfTheFieldFeedback = '#open-text-area'
-  const idOfTheFieldTelephone = '#phone'
-  const classOfTheSubmitButton = '.button'
+  const nameFieldSelector = 'input[id="firstName"]'
+  const lastNameFieldSelector = 'input#lastName'
+  const emailFieldSelector = '#email'
+  const feedbackFieldSelector = 'textarea[id="open-text-area"]'
+  const telephoneFieldSelector = 'input[id="phone"]'
+  const submitButtonSelector = 'button[class="button"]'
   const contentOfTheSubmitButton = 'Enviar'
-  const idOfTheCheckboxOfTheTelephone = '#phone-checkbox'
-  const idOfTheFieldProduct = '#product'
-  const valueOfTheTagOptionYouTube = 'youtube'
-  const contentOfTheTagOptionYouTube = 'YouTube'
-  const valueOfTheTagOptionMentorship = 'mentoria'
-  const valueOfTheTagOptionBlog = 'blog'
-  const indexOfTheTagOptionBlog = 1
-  const feedbackRadioButtonSelector = 'input[type="radio"][value="feedback"]'
-  const classOfTheSuccessMessage = '.success'
-  const classOfTheErrorMessage = '.error'
+  const productFieldSelector = 'select[id="product"]'
+  const successMessageSelector = 'span[class="success"]'
+  const ErrorMessageSelector = 'span[class="error"]'
   const client = new Client()
 
   beforeEach(() => {
@@ -34,82 +26,90 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('check the application title', () => {
+    const catTatTitle = 'Central de Atendimento ao Cliente TAT'
     cy.title().should('be.equal', catTatTitle)
   })
 
   it('fill in the required fields and submit the form', () => {
-    cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, client)
-    cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
-    cy.get(classOfTheSuccessMessage).should('be.visible')
+    cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
+    cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
+    cy.get(successMessageSelector).should('be.visible')
   })
 
   it('display an error message when submitting the form with an invalid email format', () => {
     client.email = `${client.firstName}.${client.lastName}#gmail.@br`
-    cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, client)
-    cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
-    cy.get(classOfTheErrorMessage).should('be.visible')
+    cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
+    cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
+    cy.get(ErrorMessageSelector).should('be.visible')
   })
 
   it('fill in the Telephone field with a non-numeric value', () => {
     client.telephone = 'one two six six'
-    cy.get(idOfTheFieldTelephone).should('be.visible')
-    cy.get(idOfTheFieldTelephone).type(client.telephone)
-    cy.get(idOfTheFieldTelephone).should('be.empty')
+    cy.get(telephoneFieldSelector).should('be.visible')
+    cy.get(telephoneFieldSelector).type(client.telephone)
+    cy.get(telephoneFieldSelector).should('be.empty')
   })
 
   it('display an error message when the Telephone field becomes required but is not filled in before submitting the form', () => {
-    cy.gui_fillMandatoryFields(idOfTheFieldName, idOfTheFieldLastName, idOfTheFieldEmail, idOfTheFieldFeedback, client)
-    cy.get(idOfTheCheckboxOfTheTelephone).click()
-    cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
-    cy.get(classOfTheErrorMessage).should('be.visible')
+    const phoneCheckboxSelector = 'input[id="phone-checkbox"]'
+    cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
+    cy.get(phoneCheckboxSelector).click()
+    cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
+    cy.get(ErrorMessageSelector).should('be.visible')
   }) 
 
   it('fill in and clear the Name, Lastname, Email, and Telephone fields', () => {
-    cy.get(idOfTheFieldName).should('be.visible')
-    cy.get(idOfTheFieldName).type(client.firstName)
-    cy.get(idOfTheFieldName).should('have.value', client.firstName)
-    cy.get(idOfTheFieldName).clear()
-    cy.get(idOfTheFieldName).should('be.empty')
-    cy.get(idOfTheFieldLastName).should('be.visible')
-    cy.get(idOfTheFieldLastName).type(client.lastName)
-    cy.get(idOfTheFieldLastName).should('have.value', client.lastName)
-    cy.get(idOfTheFieldLastName).clear()
-    cy.get(idOfTheFieldLastName).should('be.empty')
-    cy.get(idOfTheFieldEmail).should('be.visible')
-    cy.get(idOfTheFieldEmail).type(client.email)
-    cy.get(idOfTheFieldEmail).should('have.value', client.email)
-    cy.get(idOfTheFieldEmail).clear()
-    cy.get(idOfTheFieldEmail).should('be.empty')
-    cy.get(idOfTheFieldTelephone).should('be.visible')
-    cy.get(idOfTheFieldTelephone).type(client.telephone)
-    cy.get(idOfTheFieldTelephone).should('have.value', client.telephone)
-    cy.get(idOfTheFieldTelephone).clear()
-    cy.get(idOfTheFieldTelephone).should('be.empty')
-    cy.get(idOfTheFieldFeedback).should('be.visible')
-    cy.get(idOfTheFieldFeedback).type(client.feedback)
-    cy.get(idOfTheFieldFeedback).should('have.value', client.feedback)
-    cy.get(idOfTheFieldFeedback).clear()
-    cy.get(idOfTheFieldFeedback).should('be.empty')
+    cy.get(nameFieldSelector).should('be.visible')
+    cy.get(nameFieldSelector).type(client.firstName)
+    cy.get(nameFieldSelector).should('have.value', client.firstName)
+    cy.get(nameFieldSelector).clear()
+    cy.get(nameFieldSelector).should('be.empty')
+    cy.get(lastNameFieldSelector).should('be.visible')
+    cy.get(lastNameFieldSelector).type(client.lastName)
+    cy.get(lastNameFieldSelector).should('have.value', client.lastName)
+    cy.get(lastNameFieldSelector).clear()
+    cy.get(lastNameFieldSelector).should('be.empty')
+    cy.get(emailFieldSelector).should('be.visible')
+    cy.get(emailFieldSelector).type(client.email)
+    cy.get(emailFieldSelector).should('have.value', client.email)
+    cy.get(emailFieldSelector).clear()
+    cy.get(emailFieldSelector).should('be.empty')
+    cy.get(telephoneFieldSelector).should('be.visible')
+    cy.get(telephoneFieldSelector).type(client.telephone)
+    cy.get(telephoneFieldSelector).should('have.value', client.telephone)
+    cy.get(telephoneFieldSelector).clear()
+    cy.get(telephoneFieldSelector).should('be.empty')
+    cy.get(feedbackFieldSelector).should('be.visible')
+    cy.get(feedbackFieldSelector).type(client.feedback)
+    cy.get(feedbackFieldSelector).should('have.value', client.feedback)
+    cy.get(feedbackFieldSelector).clear()
+    cy.get(feedbackFieldSelector).should('be.empty')
   })
 
   it('display an error message when submitting the form without filling in the required fields', () => {
-    cy.contains(classOfTheSubmitButton, contentOfTheSubmitButton).click()
-    cy.get(classOfTheErrorMessage).should('be.visible')
+    cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
+    cy.get(ErrorMessageSelector).should('be.visible')
   })
 
   it('select a product (YouTube) by its text', () => {
-    cy.get(idOfTheFieldProduct).select(contentOfTheTagOptionYouTube).should('have.value', valueOfTheTagOptionYouTube)
+    const valueOfTheTagOptionYouTube = 'youtube'
+    const contentOfTheTagOptionYouTube = 'YouTube'
+    cy.get(productFieldSelector).select(contentOfTheTagOptionYouTube).should('have.value', valueOfTheTagOptionYouTube)
   })
 
   it('select a product (Mentorship) by its value (value)', () => {
-    cy.get(idOfTheFieldProduct).select(valueOfTheTagOptionMentorship).should('have.value', valueOfTheTagOptionMentorship)
+    const valueOfTheTagOptionMentorship = 'mentoria'
+    cy.get(productFieldSelector).select(valueOfTheTagOptionMentorship).should('have.value', valueOfTheTagOptionMentorship)
   })
 
   it('select a product (Blog) by its index', () => {
-    cy.get(idOfTheFieldProduct).select(indexOfTheTagOptionBlog).should('have.value', valueOfTheTagOptionBlog)
+    const indexOfTheTagOptionBlog = 1
+    const valueOfTheTagOptionBlog = 'blog'
+    cy.get(productFieldSelector).select(indexOfTheTagOptionBlog).should('have.value', valueOfTheTagOptionBlog)
   })
 
   it('mark the type of service "Feedback"', () => {
+    const feedbackRadioButtonSelector = 'input[type="radio"][value="feedback"]'
     cy.get(feedbackRadioButtonSelector).check()
     cy.get(feedbackRadioButtonSelector).should('be.checked')
   })
