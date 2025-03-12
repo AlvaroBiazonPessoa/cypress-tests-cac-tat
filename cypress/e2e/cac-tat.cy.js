@@ -123,4 +123,12 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     })
   })  
 
+  it('mark all communication channels, then unmark the last communication channel', () => {
+    const checkboxInputTagSelector = 'input[type="checkbox"]'
+    cy.get(checkboxInputTagSelector).check()
+    cy.get(checkboxInputTagSelector).should('be.checked')
+    cy.get(checkboxInputTagSelector).last().uncheck()
+    cy.get(checkboxInputTagSelector).last().should('not.be.checked')
+  })
+
 })
