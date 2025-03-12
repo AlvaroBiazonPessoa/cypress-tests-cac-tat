@@ -1,5 +1,5 @@
 const { faker } = require('@faker-js/faker')
-const Client = require('../fixtures/Client')
+const Client = require('../../fixtures/Client')
 
 describe('Central de Atendimento ao Cliente TAT', () => {
 
