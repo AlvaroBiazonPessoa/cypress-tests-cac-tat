@@ -51,9 +51,10 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('display an error message when the Telephone field becomes required but is not filled in before submitting the form', () => {
-    const phoneCheckboxSelector = 'input[id="phone-checkbox"]'
+    const phoneCheckboxSelector = 'input[type="checkbox"][id="phone-checkbox"]'
     cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
-    cy.get(phoneCheckboxSelector).click()
+    cy.get(phoneCheckboxSelector).check()
+    cy.get(phoneCheckboxSelector).should('be.checked')
     cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
     cy.get(ErrorMessageSelector).should('be.visible')
   }) 
