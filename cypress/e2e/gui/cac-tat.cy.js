@@ -2,8 +2,7 @@ const { faker } = require('@faker-js/faker')
 const Client = require('../../fixtures/Client')
 
 describe('Central de Atendimento ao Cliente TAT', () => {
-
-  const cacTatUrl = 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com/index.html'
+  
   const nameFieldSelector = 'input[id="firstName"]'
   const lastNameFieldSelector = 'input#lastName'
   const emailFieldSelector = '#email'
@@ -17,7 +16,8 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const client = new Client()
 
   beforeEach(() => {
-    cy.visit(cacTatUrl)
+    const resource = '/index.html'
+    cy.visit(resource)
     client.firstName = faker.person.firstName()
     client.lastName = faker.person.lastName()
     client.email = faker.internet.email({ firstName: client.firstName, lastName: client.lastName })
