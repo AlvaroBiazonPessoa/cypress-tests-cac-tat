@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "cy.open": "cypress open",
-    "test": "cypress run"
+    "cy.iterative": "cypress open",
+    "cy.headless": "cypress run"
   },
   "keywords": [],
   "author": "",
