@@ -15,9 +15,9 @@ npm install
 ```
 
 ##  ▶ How to run
-Iterative mode:
+Interactive mode:
 ```sh
-npm run cy.iterative
+npm run cy.interactive
 ```
 Headless mode:
 ```sh

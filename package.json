@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "cy.iterative": "cypress open",
+    "cy.interactive": "cypress open",
     "cy.headless": "cypress run"
   },
   "keywords": [],
