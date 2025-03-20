@@ -146,7 +146,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   it('drag and drop an attachment', () => {
     fileName = 'lebron_james.jpg'
     cy.get(addAnAttachmentFieldSelector)
-      .selectFile(pathToFile + fileName)
+      .selectFile(pathToFile + fileName, { action: 'drag-drop' })
       .should(input => {
         expect(input[0].files[0].name).to.eq(fileName)
       })
