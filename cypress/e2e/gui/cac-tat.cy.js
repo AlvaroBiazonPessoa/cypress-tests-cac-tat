@@ -141,7 +141,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('add an attachment', () => {
-    const fileName = 'example.json'
+    const fileName = 'just_hanging_around.jpg'
     const action = 'select'
     cy.gui_addAnAttachment(addAnAttachmentFieldSelector, pathToFile, fileName, action)
       .should(input => {
