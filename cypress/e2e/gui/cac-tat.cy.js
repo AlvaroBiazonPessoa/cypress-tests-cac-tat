@@ -13,7 +13,6 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const productFieldSelector = 'select[id="product"]'
   const addAnAttachmentFieldSelector = 'input[type=file][id="file-upload"]'
   const pathToFile = 'cypress/fixtures/' 
-  let fileName = ''
   const successMessageSelector = 'span[class="success"]'
   const ErrorMessageSelector = 'span[class="error"]'
   const client = new Client()
@@ -142,20 +141,18 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('add an attachment', () => {
-    fileName = 'example.json'
-    cy.get(addAnAttachmentFieldSelector).should('be.visible')
-    cy.get(addAnAttachmentFieldSelector)
-      .selectFile(pathToFile + fileName)
+    const fileName = 'example.json'
+    const action = 'select'
+    cy.gui_addAnAttachment(addAnAttachmentFieldSelector, pathToFile, fileName, action)
       .should(input => {
         expect(input[0].files[0].name).to.eq(fileName)
       })
   })
 
   it('drag and drop an attachment', () => {
-    fileName = 'lebron_james.jpg'
-    cy.get(addAnAttachmentFieldSelector).should('be.visible')
-    cy.get(addAnAttachmentFieldSelector)
-      .selectFile(pathToFile + fileName, { action: 'drag-drop' })
+    const fileName = 'lebron_james.jpg'
+    const action = 'drag-drop'
+    cy.gui_addAnAttachment(addAnAttachmentFieldSelector, pathToFile, fileName, action)
       .should(input => {
         expect(input[0].files[0].name).to.eq(fileName)
       })
