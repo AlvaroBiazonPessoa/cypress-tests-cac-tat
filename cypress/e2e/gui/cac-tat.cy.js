@@ -131,4 +131,15 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(checkboxInputTagSelector).last().should('not.be.checked')
   })
 
+  it('add an attachment', () => {
+    const addAnAttachmentFieldSelector = 'input[type=file][id="file-upload"]'
+    const fileName = 'example.json'
+    const pathToFile = 'cypress/fixtures/' 
+    cy.get(addAnAttachmentFieldSelector)
+      .selectFile(pathToFile + fileName)
+      .should(input => {
+        expect(input[0].files[0].name).to.eq(fileName)
+      })
+  })
+
 })
