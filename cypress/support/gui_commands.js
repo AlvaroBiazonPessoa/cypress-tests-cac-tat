@@ -12,3 +12,8 @@ Cypress.Commands.add('gui_fillMandatoryFields', (nameFieldSelector, lastNameFiel
     cy.get(feedbackFieldSelector).type(client.feedback)
     cy.get(feedbackFieldSelector).should('have.value', client.feedback)
 })
+
+Cypress.Commands.add('gui_addAnAttachment', (addAnAttachmentFieldSelector, pathToFile, fileName, action) => {
+    cy.get(addAnAttachmentFieldSelector).should('be.visible')
+    cy.get(addAnAttachmentFieldSelector).selectFile(pathToFile + fileName, { action: action })
+})
