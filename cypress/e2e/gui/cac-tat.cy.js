@@ -56,6 +56,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   it('display an error message when the Telephone field becomes required but is not filled in before submitting the form', () => {
     const phoneCheckboxSelector = 'input[type="checkbox"][id="phone-checkbox"]'
     cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
+    cy.get(phoneCheckboxSelector).should('be.visible')
     cy.get(phoneCheckboxSelector).check()
     cy.get(phoneCheckboxSelector).should('be.checked')
     cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
@@ -98,28 +99,33 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   it('select a product (YouTube) by its text', () => {
     const valueOfTheTagOptionYouTube = 'youtube'
     const contentOfTheTagOptionYouTube = 'YouTube'
+    cy.get(productFieldSelector).should('be.visible')
     cy.get(productFieldSelector).select(contentOfTheTagOptionYouTube).should('have.value', valueOfTheTagOptionYouTube)
   })
 
   it('select a product (Mentorship) by its value (value)', () => {
     const valueOfTheTagOptionMentorship = 'mentoria'
+    cy.get(productFieldSelector).should('be.visible')
     cy.get(productFieldSelector).select(valueOfTheTagOptionMentorship).should('have.value', valueOfTheTagOptionMentorship)
   })
 
   it('select a product (Blog) by its index', () => {
     const indexOfTheTagOptionBlog = 1
     const valueOfTheTagOptionBlog = 'blog'
+    cy.get(productFieldSelector).should('be.visible')
     cy.get(productFieldSelector).select(indexOfTheTagOptionBlog).should('have.value', valueOfTheTagOptionBlog)
   })
 
   it('mark the type of service "Feedback"', () => {
     const feedbackRadioButtonSelector = 'input[type="radio"][value="feedback"]'
+    cy.get(feedbackRadioButtonSelector).should('be.visible')
     cy.get(feedbackRadioButtonSelector).check()
     cy.get(feedbackRadioButtonSelector).should('be.checked')
   })
 
   it('mark each type of service', () => {
     const radioInputTagSelector = 'input[type="radio"]'
+    cy.get(radioInputTagSelector).should('be.visible')
     cy.get(radioInputTagSelector).each((typeOfService) => {
       cy.wrap(typeOfService).check()
       cy.wrap(typeOfService).should('be.checked')
@@ -128,6 +134,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   it('mark all communication channels, then unmark the last communication channel', () => {
     const checkboxInputTagSelector = 'input[type="checkbox"]'
+    cy.get(checkboxInputTagSelector).should('be.visible')
     cy.get(checkboxInputTagSelector).check()
     cy.get(checkboxInputTagSelector).should('be.checked')
     cy.get(checkboxInputTagSelector).last().uncheck()
@@ -136,6 +143,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   it('add an attachment', () => {
     fileName = 'example.json'
+    cy.get(addAnAttachmentFieldSelector).should('be.visible')
     cy.get(addAnAttachmentFieldSelector)
       .selectFile(pathToFile + fileName)
       .should(input => {
@@ -145,6 +153,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   it('drag and drop an attachment', () => {
     fileName = 'lebron_james.jpg'
+    cy.get(addAnAttachmentFieldSelector).should('be.visible')
     cy.get(addAnAttachmentFieldSelector)
       .selectFile(pathToFile + fileName, { action: 'drag-drop' })
       .should(input => {
