@@ -11,6 +11,9 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const submitButtonSelector = 'button[class="button"]'
   const contentOfTheSubmitButton = 'Enviar'
   const productFieldSelector = 'select[id="product"]'
+  const addAnAttachmentFieldSelector = 'input[type=file][id="file-upload"]'
+  const pathToFile = 'cypress/fixtures/' 
+  let fileName = ''
   const successMessageSelector = 'span[class="success"]'
   const ErrorMessageSelector = 'span[class="error"]'
   const client = new Client()
@@ -132,9 +135,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('add an attachment', () => {
-    const addAnAttachmentFieldSelector = 'input[type=file][id="file-upload"]'
-    const fileName = 'example.json'
-    const pathToFile = 'cypress/fixtures/' 
+    fileName = 'example.json'
     cy.get(addAnAttachmentFieldSelector)
       .selectFile(pathToFile + fileName)
       .should(input => {
