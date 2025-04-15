@@ -15,6 +15,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const pathToFile = 'cypress/fixtures/' 
   const successMessageSelector = 'span[class="success"]'
   const ErrorMessageSelector = 'span[class="error"]'
+  const privacyPolicyLinkSelector = 'a[href="privacy.html"]'
   const client = new Client()
 
   beforeEach(() => {
@@ -159,9 +160,21 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   })
 
   it('access Privacy Policy without clicking', () => {
-    const privacyPolicyLinkSelector = 'a[href="privacy.html"]'
     cy.get(privacyPolicyLinkSelector).should('be.visible')
     cy.get(privacyPolicyLinkSelector).should('have.attr', 'target', '_blank')
+  })
+
+  it('access Privacy Policy by removing target attribute', () => {
+    const newResource = '/privacy.html'
+    const titleOfThePageSelector = 'h1[id="title"]'
+    const titleOfThePage = 'CAC TAT - Política de Privacidade'
+    cy.get(privacyPolicyLinkSelector).should('be.visible')
+    cy.get(privacyPolicyLinkSelector).invoke('removeAttr', 'target')
+    cy.get(privacyPolicyLinkSelector).should('not.have.attr', 'target')
+    cy.get(privacyPolicyLinkSelector).click()
+    cy.url().should('include', newResource)
+    cy.get(titleOfThePageSelector).should('be.visible')
+    cy.get(titleOfThePageSelector).should('have.text', titleOfThePage)
   })
 
 })
