@@ -15,11 +15,22 @@ npm install
 ```
 
 ##  ▶ How to run
-Interactive mode:
+Interactive mode with desktop viewport:
 ```sh
-npm run cy.interactive
+npm run cy.interactive.desktop
 ```
-Headless mode:
+
+Interactive mode with mobile viewport:
 ```sh
-npm run cy.headless
+npm run cy.interactive.mobile
+```
+
+Headless mode with desktop viewport::
+```sh
+npm run cy.headless.desktop
+```
+
+Headless mode with desktop mobile::
+```sh
+npm run cy.headless.mobile
 ```
