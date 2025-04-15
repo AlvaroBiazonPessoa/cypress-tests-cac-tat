@@ -25,12 +25,12 @@ Interactive mode with mobile viewport:
 npm run cy.interactive.mobile
 ```
 
-Headless mode with desktop viewport::
+Headless mode with desktop viewport:
 ```sh
 npm run cy.headless.desktop
 ```
 
-Headless mode with desktop mobile::
+Headless mode with mobile viewport:
 ```sh
 npm run cy.headless.mobile
 ```
