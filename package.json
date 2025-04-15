@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "cy.interactive": "cypress open",
-    "cy.headless": "cypress run"
+    "cy.interactive.desktop": "cypress open --config viewportWidth=1440 viewportHeight=900",
+    "cy.interactive.mobile": "cypress open --config viewportWidth=375 viewportHeight=667",
+    "cy.headless.desktop": "cypress run --config viewportWidth=1440 viewportHeight=900",
+    "cy.headless.mobile": "cypress run --config viewportWidth=375 viewportHeight=667"
   },
   "keywords": [],
   "author": "",
