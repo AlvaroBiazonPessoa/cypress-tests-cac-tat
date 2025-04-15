@@ -158,4 +158,10 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       })
   })
 
+  it('access Privacy Policy without clicking', () => {
+    const privacyPolicyLinkSelector = 'a[href="privacy.html"]'
+    cy.get(privacyPolicyLinkSelector).should('be.visible')
+    cy.get(privacyPolicyLinkSelector).should('have.attr', 'target', '_blank')
+  })
+
 })
