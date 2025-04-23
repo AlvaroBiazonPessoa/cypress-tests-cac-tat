@@ -14,7 +14,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
   const addAnAttachmentFieldSelector = 'input[type=file][id="file-upload"]'
   const pathToFile = 'cypress/fixtures/' 
   const successMessageSelector = 'span[class="success"]'
-  const ErrorMessageSelector = 'span[class="error"]'
+  const errorMessageSelector = 'span[class="error"]'
   const privacyPolicyLinkSelector = 'a[href="privacy.html"]'
   const client = new Client()
 
@@ -43,7 +43,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     client.email = `${client.firstName}.${client.lastName}#gmail.@br`
     cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
     cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
-    cy.get(ErrorMessageSelector).should('be.visible')
+    cy.get(errorMessageSelector).should('be.visible')
   })
 
   it('fill in the Telephone field with a non-numeric value', () => {
@@ -60,7 +60,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(phoneCheckboxSelector).check()
     cy.get(phoneCheckboxSelector).should('be.checked')
     cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
-    cy.get(ErrorMessageSelector).should('be.visible')
+    cy.get(errorMessageSelector).should('be.visible')
   }) 
 
   it('fill in and clear the Name, Lastname, Email, and Telephone fields', () => {
@@ -93,7 +93,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
   it('display an error message when submitting the form without filling in the required fields', () => {
     cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
-    cy.get(ErrorMessageSelector).should('be.visible')
+    cy.get(errorMessageSelector).should('be.visible')
   })
 
   it('select a product (YouTube) by its text', () => {
