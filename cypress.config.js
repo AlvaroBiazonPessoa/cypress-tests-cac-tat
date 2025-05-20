@@ -4,7 +4,8 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'https://cac-tat-v3.s3.eu-central-1.amazonaws.com',
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      require('@cypress/grep/src/plugin')(config)
+      return config
     },
   },
 });

@@ -28,32 +28,32 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     client.feedback = faker.lorem.words(5)
   })
 
-  it('check the application title', () => {
+  it('check the application title', { tags: ['@ID-01'] }, () => {
     const catTatTitle = 'Central de Atendimento ao Cliente TAT'
     cy.title().should('be.equal', catTatTitle)
   })
 
-  it('fill in the required fields and submit the form', () => {
+  it('fill in the required fields and submit the form', { tags: ['@ID-02'] }, () => {
     cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
     cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
     cy.get(successMessageSelector).should('be.visible')
   })
 
-  it('display an error message when submitting the form with an invalid email format', () => {
+  it('display an error message when submitting the form with an invalid email format', { tags: ['@ID-03'] }, () => {
     client.email = `${client.firstName}.${client.lastName}#gmail.@br`
     cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
     cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
     cy.get(errorMessageSelector).should('be.visible')
   })
 
-  it('fill in the Telephone field with a non-numeric value', () => {
+  it('fill in the Telephone field with a non-numeric value', { tags: ['@ID-04'] }, () => {
     client.telephone = 'one two six six'
     cy.get(telephoneFieldSelector).should('be.visible')
     cy.get(telephoneFieldSelector).type(client.telephone)
     cy.get(telephoneFieldSelector).should('be.empty')
   })
 
-  it('display an error message when the Telephone field becomes required but is not filled in before submitting the form', () => {
+  it('display an error message when the Telephone field becomes required but is not filled in before submitting the form', { tags: ['@ID-05'] }, () => {
     const phoneCheckboxSelector = 'input[type="checkbox"][id="phone-checkbox"]'
     cy.gui_fillMandatoryFields(nameFieldSelector, lastNameFieldSelector, emailFieldSelector, feedbackFieldSelector, client)
     cy.get(phoneCheckboxSelector).should('be.visible')
@@ -63,7 +63,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(errorMessageSelector).should('be.visible')
   }) 
 
-  it('fill in and clear the Name, Lastname, Email, and Telephone fields', () => {
+  it('fill in and clear the Name, Lastname, Email, and Telephone fields', { tags: ['@ID-06'] }, () => {
     cy.get(nameFieldSelector).should('be.visible')
     cy.get(nameFieldSelector).type(client.firstName)
     cy.get(nameFieldSelector).should('have.value', client.firstName)
@@ -91,39 +91,39 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(feedbackFieldSelector).should('be.empty')
   })
 
-  it('display an error message when submitting the form without filling in the required fields', () => {
+  it('display an error message when submitting the form without filling in the required fields', { tags: ['@ID-07'] }, () => {
     cy.contains(submitButtonSelector, contentOfTheSubmitButton).click()
     cy.get(errorMessageSelector).should('be.visible')
   })
 
-  it('select a product (YouTube) by its text', () => {
+  it('select a product (YouTube) by its text', { tags: ['@ID-08'] }, () => {
     const valueOfTheTagOptionYouTube = 'youtube'
     const contentOfTheTagOptionYouTube = 'YouTube'
     cy.get(productFieldSelector).should('be.visible')
     cy.get(productFieldSelector).select(contentOfTheTagOptionYouTube).should('have.value', valueOfTheTagOptionYouTube)
   })
 
-  it('select a product (Mentorship) by its value (value)', () => {
+  it('select a product (Mentorship) by its value (value)', { tags: ['@ID-09'] }, () => {
     const valueOfTheTagOptionMentorship = 'mentoria'
     cy.get(productFieldSelector).should('be.visible')
     cy.get(productFieldSelector).select(valueOfTheTagOptionMentorship).should('have.value', valueOfTheTagOptionMentorship)
   })
 
-  it('select a product (Blog) by its index', () => {
+  it('select a product (Blog) by its index', { tags: ['@ID-10'] }, () => {
     const indexOfTheTagOptionBlog = 1
     const valueOfTheTagOptionBlog = 'blog'
     cy.get(productFieldSelector).should('be.visible')
     cy.get(productFieldSelector).select(indexOfTheTagOptionBlog).should('have.value', valueOfTheTagOptionBlog)
   })
 
-  it('mark the type of service "Feedback"', () => {
+  it('mark the type of service "Feedback"', { tags: ['@ID-11'] }, () => {
     const feedbackRadioButtonSelector = 'input[type="radio"][value="feedback"]'
     cy.get(feedbackRadioButtonSelector).should('be.visible')
     cy.get(feedbackRadioButtonSelector).check()
     cy.get(feedbackRadioButtonSelector).should('be.checked')
   })
 
-  it('mark each type of service', () => {
+  it('mark each type of service', { tags: ['@ID-12'] }, () => {
     const radioInputTagSelector = 'input[type="radio"]'
     cy.get(radioInputTagSelector).should('be.visible')
     cy.get(radioInputTagSelector).each((typeOfService) => {
@@ -132,7 +132,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     })
   })  
 
-  it('mark all communication channels, then unmark the last communication channel', () => {
+  it('mark all communication channels, then unmark the last communication channel', { tags: ['@ID-13'] }, () => {
     const checkboxInputTagSelector = 'input[type="checkbox"]'
     cy.get(checkboxInputTagSelector).should('be.visible')
     cy.get(checkboxInputTagSelector).check()
@@ -141,7 +141,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
     cy.get(checkboxInputTagSelector).last().should('not.be.checked')
   })
 
-  it('add an attachment', () => {
+  it('add an attachment', { tags: ['@ID-14'] }, () => {
     const fileName = 'just_hanging_around.jpg'
     const action = 'select'
     cy.gui_addAnAttachment(addAnAttachmentFieldSelector, pathToFile, fileName, action)
@@ -150,7 +150,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       })
   })
 
-  it('drag and drop an attachment', () => {
+  it('drag and drop an attachment', { tags: ['@ID-15'] }, () => {
     const fileName = 'lebron_james.jpg'
     const action = 'drag-drop'
     cy.gui_addAnAttachment(addAnAttachmentFieldSelector, pathToFile, fileName, action)
@@ -159,12 +159,12 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       })
   })
 
-  it('access Privacy Policy without clicking', () => {
+  it('access Privacy Policy without clicking', { tags: ['@ID-16'] }, () => {
     cy.get(privacyPolicyLinkSelector).should('be.visible')
     cy.get(privacyPolicyLinkSelector).should('have.attr', 'target', '_blank')
   })
 
-  it('access Privacy Policy by removing target attribute', () => {
+  it('access Privacy Policy by removing target attribute', { tags: ['@ID-17'] }, () => {
     const newResource = '/privacy.html'
     const titleOfThePageSelector = 'h1[id="title"]'
     const titleOfThePage = 'CAC TAT - Política de Privacidade'
